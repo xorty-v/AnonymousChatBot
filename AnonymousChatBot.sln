@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0D46E22C-26B0-4AEF-B83B-FF86C430D216}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B14A4219-8290-4DBC-B0B4-9BA88B58594C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F0CD1D75-6D70-4A75-BF41-4BF837416BB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnonymousChatBot.Domain", "AnonymousChatBot.Domain\AnonymousChatBot.Domain.csproj", "{49532FCA-DC12-474B-9FBB-4AD450CA38B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnonymousChatBot.Persistence", "AnonymousChatBot.Persistence\AnonymousChatBot.Persistence.csproj", "{D5A516DE-A305-4D94-A165-B400170F92E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnonymousChatBot.Service", "AnonymousChatBot.Service\AnonymousChatBot.Service.csproj", "{D0F5323F-AF5E-4F81-A372-7947907370C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnonymousChatBot.WebApi", "AnonymousChatBot.WebApi\AnonymousChatBot.WebApi.csproj", "{60B1ADF0-F94B-40B1-8C39-AAF63FBA7C17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49532FCA-DC12-474B-9FBB-4AD450CA38B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49532FCA-DC12-474B-9FBB-4AD450CA38B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49532FCA-DC12-474B-9FBB-4AD450CA38B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49532FCA-DC12-474B-9FBB-4AD450CA38B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A516DE-A305-4D94-A165-B400170F92E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A516DE-A305-4D94-A165-B400170F92E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A516DE-A305-4D94-A165-B400170F92E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A516DE-A305-4D94-A165-B400170F92E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0F5323F-AF5E-4F81-A372-7947907370C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F5323F-AF5E-4F81-A372-7947907370C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F5323F-AF5E-4F81-A372-7947907370C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F5323F-AF5E-4F81-A372-7947907370C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60B1ADF0-F94B-40B1-8C39-AAF63FBA7C17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60B1ADF0-F94B-40B1-8C39-AAF63FBA7C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60B1ADF0-F94B-40B1-8C39-AAF63FBA7C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60B1ADF0-F94B-40B1-8C39-AAF63FBA7C17}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{49532FCA-DC12-474B-9FBB-4AD450CA38B9} = {0D46E22C-26B0-4AEF-B83B-FF86C430D216}
+		{D5A516DE-A305-4D94-A165-B400170F92E4} = {B14A4219-8290-4DBC-B0B4-9BA88B58594C}
+		{D0F5323F-AF5E-4F81-A372-7947907370C0} = {0D46E22C-26B0-4AEF-B83B-FF86C430D216}
+		{60B1ADF0-F94B-40B1-8C39-AAF63FBA7C17} = {F0CD1D75-6D70-4A75-BF41-4BF837416BB2}
+	EndGlobalSection
+EndGlobal
