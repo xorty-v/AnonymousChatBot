@@ -1,9 +1,9 @@
 ﻿using AnonymousChatBot.Domain.Entities;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace AnonymousChatBot.Domain;
+namespace AnonymousChatBot.Domain.Constans;
 
-public class BotKeyboardResponses
+public static class BotKeyboardResponses
 {
     public static InlineKeyboardMarkup ChooseInterests(List<Interest> allInterests, List<Interest> userInterests)
     {
@@ -20,7 +20,6 @@ public class BotKeyboardResponses
 
             row.Add(InlineKeyboardButton.WithCallbackData(buttonText, interestCallbackData));
 
-            // Если в ряду уже 2 кнопки или это последний интерес, добавьте ряд в клавиатуру.
             if (row.Count == 2 || interest == allInterests.Last())
             {
                 interestButtons.Add(row.ToArray());

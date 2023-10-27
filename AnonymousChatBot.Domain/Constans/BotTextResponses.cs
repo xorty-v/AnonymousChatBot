@@ -1,4 +1,4 @@
-﻿namespace AnonymousChatBot.Domain;
+﻿namespace AnonymousChatBot.Domain.Constans;
 
 public static class BotTextResponses
 {

@@ -12,27 +12,23 @@ public class QueueRepository : IQueueRepository
         _dbContext = dbContext;
 
 
-    public async Task CreateAsync(Queue queue)
+    public async Task AddAsync(Queue queue)
     {
         await _dbContext.Queues.AddAsync(queue);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<Queue> GetUserIdAsync()
-    {
-        return await _dbContext.Queues.Include(q => q.User).ThenInclude(q => q.Interests).FirstOrDefaultAsync();
-    }
-
     public async Task<Queue> GetUserByInterestsAsync(List<Interest> interests)
     {
-        return await _dbContext.Queues
-            .Where(q => q.User.Interests.Any(ui => interests.Contains(ui)))
-            .FirstOrDefaultAsync();
+        return interests.Count == 0
+            ? await _dbContext.Queues.AsNoTracking().FirstOrDefaultAsync(u => u.User.Interests.Count == 0)
+            : await _dbContext.Queues.AsNoTracking()
+                .FirstOrDefaultAsync(q => q.User.Interests.Any(u => interests.Contains(u)));
     }
 
     public async Task<bool> IsUserExistAsync(long chatId)
     {
-        return await _dbContext.Queues.AnyAsync(q => q.UserId == chatId);
+        return await _dbContext.Queues.AsNoTracking().AnyAsync(q => q.UserId == chatId);
     }
 
     public async Task DeleteAsync(Queue queue)

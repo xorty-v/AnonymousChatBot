@@ -2,9 +2,10 @@
 
 namespace AnonymousChatBot.Domain.Interfaces;
 
-public interface IQueueRepository : IBaseRepository<Queue>
+public interface IQueueRepository
 {
-    Task<Queue> GetUserIdAsync();
+    Task AddAsync(Queue queue);
     Task<Queue> GetUserByInterestsAsync(List<Interest> interests);
     Task<bool> IsUserExistAsync(long chatId);
+    Task DeleteAsync(Queue chat);
 }

@@ -11,13 +11,8 @@ public class InterestRepository : IInterestRepository
     public InterestRepository(ApplicationDbContext dbContext) =>
         _dbContext = dbContext;
 
-    public async Task<Interest> GetInterestById(int interestId)
-    {
-        return await _dbContext.Interests.FirstOrDefaultAsync(i => i.Id == interestId);
-    }
-
     public async Task<List<Interest>> GetAllAsync()
     {
-        return await _dbContext.Interests.ToListAsync();
+        return await _dbContext.Interests.AsNoTracking().ToListAsync();
     }
 }

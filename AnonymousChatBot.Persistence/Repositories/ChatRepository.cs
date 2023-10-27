@@ -12,7 +12,7 @@ public class ChatRepository : IChatRepository
         _dbContext = dbContext;
 
 
-    public async Task CreateAsync(Chat chat)
+    public async Task AddAsync(Chat chat)
     {
         await _dbContext.Chats.AddAsync(chat);
         await _dbContext.SaveChangesAsync();
@@ -20,7 +20,8 @@ public class ChatRepository : IChatRepository
 
     public async Task<Chat> GetChatByIdAsync(long chatId)
     {
-        return await _dbContext.Chats.FirstOrDefaultAsync(c => c.ChatOne == chatId || c.ChatTwo == chatId);
+        return await _dbContext.Chats.AsNoTracking()
+            .FirstOrDefaultAsync(c => c.ChatOne == chatId || c.ChatTwo == chatId);
     }
 
     public async Task DeleteAsync(Chat chat)

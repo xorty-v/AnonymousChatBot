@@ -11,26 +11,34 @@ public class UserRepository : IUserRepository
     public UserRepository(ApplicationDbContext dbContext) =>
         _dbContext = dbContext;
 
-    public async Task CreateAsync(User user)
+    public async Task AddAsync(User user)
     {
         await _dbContext.Users.AddAsync(user);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(User user)
+    public async Task AddInterestToUserAsync(long chatId, int interestId)
     {
-        _dbContext.Users.Update(user);
+        var user = await _dbContext.Users
+            .Include(u => u.Interests)
+            .FirstOrDefaultAsync(u => u.ChatId == chatId);
+
+        var interest = await _dbContext.Interests
+            .FirstOrDefaultAsync(i => i.Id == interestId);
+
+        user.Interests.Add(interest);
         await _dbContext.SaveChangesAsync();
     }
 
     public async Task<User> GetUserByIdAsync(long chatId)
     {
-        return await _dbContext.Users.FirstOrDefaultAsync(u => u.ChatId == chatId);
+        return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.ChatId == chatId);
     }
 
     public async Task<List<Interest>> GetUserInterestsAsync(long chatId)
     {
-        var user = await _dbContext.Users.Include(u => u.Interests)
+        var user = await _dbContext.Users.AsNoTracking()
+            .Include(u => u.Interests)
             .FirstOrDefaultAsync(u => u.ChatId == chatId);
 
         return user.Interests.ToList();
@@ -38,33 +46,16 @@ public class UserRepository : IUserRepository
 
     public async Task<bool> IsUserInterestAsync(long chatId, int interestId)
     {
-        return await _dbContext.Users
+        return await _dbContext.Users.AsNoTracking()
             .AnyAsync(x => x.ChatId == chatId && x.Interests
                 .Any(t => t.Id == interestId));
     }
 
-    public async Task AddInterestToUserAsync(long chatId, int interestId)
-    {
-        var user = await _dbContext.Users.Include(u => u.Interests)
-            .FirstOrDefaultAsync(u => u.ChatId == chatId);
-
-        if (user == null) return;
-
-        var interest = await _dbContext.Interests.FirstOrDefaultAsync(i => i.Id == interestId);
-
-        if (interest != null)
-        {
-            user.Interests.Add(interest);
-            await _dbContext.SaveChangesAsync();
-        }
-    }
-
     public async Task DeleteUserAllInterestsAsync(long chatId)
     {
-        var user = await _dbContext.Users.Include(u => u.Interests)
+        var user = await _dbContext.Users
+            .Include(u => u.Interests)
             .FirstOrDefaultAsync(u => u.ChatId == chatId);
-
-        if (user == null) return;
 
         user.Interests.Clear();
         await _dbContext.SaveChangesAsync();
@@ -73,21 +64,9 @@ public class UserRepository : IUserRepository
     public async Task DeleteUserInterestAsync(long chatId, int interestId)
     {
         var user = await _dbContext.Users.Include(u => u.Interests).FirstOrDefaultAsync(u => u.ChatId == chatId);
-
-        if (user == null) return;
-
         var interest = user.Interests.FirstOrDefault(i => i.Id == interestId);
 
-        if (interest != null)
-        {
-            user.Interests.Remove(interest);
-            await _dbContext.SaveChangesAsync();
-        }
-    }
-
-    public async Task DeleteAsync(User user)
-    {
-        _dbContext.Users.Remove(user);
+        user.Interests.Remove(interest);
         await _dbContext.SaveChangesAsync();
     }
 }
