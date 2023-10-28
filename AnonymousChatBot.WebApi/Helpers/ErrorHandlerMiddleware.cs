@@ -1,5 +1,4 @@
-﻿using AnonymousChatBot.Service.Errors;
-using Telegram.Bot.Exceptions;
+﻿using Telegram.Bot.Exceptions;
 
 namespace AnonymousChatBot.WebApi.Helpers;
 
@@ -23,10 +22,6 @@ public class ErrorHandlerMiddleware
         catch (ApiRequestException ex)
         {
             _logger.LogError($"[Telegram API Error]:\n[{ex.ErrorCode}]\n{ex.Message}");
-        }
-        catch (UnknownUpdateException ex)
-        {
-            _logger.LogError($"[Unknown update type]: {ex.Message}");
         }
         catch (Exception ex)
         {

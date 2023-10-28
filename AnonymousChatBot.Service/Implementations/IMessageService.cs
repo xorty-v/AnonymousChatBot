@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot.Types;
 
-namespace AnonymousChatBot.Service.Interfaces;
+namespace AnonymousChatBot.Service.Implementations;
 
 public interface IMessageService
 {

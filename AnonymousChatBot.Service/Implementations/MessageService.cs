@@ -1,8 +1,7 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
-using AnonymousChatBot.Domain;
+using AnonymousChatBot.Domain.Constans;
 using AnonymousChatBot.Domain.Interfaces;
-using AnonymousChatBot.Service.Interfaces;
 
 namespace AnonymousChatBot.Service.Implementations;
 
@@ -65,7 +64,6 @@ public class MessageService : IMessageService
 
             var user = await _userRepository.GetUserByIdAsync(chatId);
 
-            // есть ли этот инетресс у пользователя
             if (user != null && await _userRepository.IsUserInterestAsync(chatId, interestId))
             {
                 await _userRepository.DeleteUserInterestAsync(chatId, interestId);
@@ -78,6 +76,7 @@ public class MessageService : IMessageService
             var userInterests = await _userRepository.GetUserInterestsAsync(chatId);
             var allInterests = await _interestRepository.GetAllAsync();
             var updatedKeyboard = BotKeyboardResponses.ChooseInterests(allInterests, userInterests);
+
             await _botClient.EditMessageReplyMarkupAsync(chatId, messageId, updatedKeyboard);
         }
 
@@ -88,6 +87,7 @@ public class MessageService : IMessageService
             var userInterests = await _userRepository.GetUserInterestsAsync(chatId);
             var allInterests = await _interestRepository.GetAllAsync();
             var updatedKeyboard = BotKeyboardResponses.ChooseInterests(allInterests, userInterests);
+
             await _botClient.EditMessageReplyMarkupAsync(chatId, messageId, updatedKeyboard);
         }
     }
