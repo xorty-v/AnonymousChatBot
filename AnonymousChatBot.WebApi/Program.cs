@@ -1,25 +1,15 @@
 using AnonymousChatBot.Persistence;
+using AnonymousChatBot.Service;
 using AnonymousChatBot.WebApi;
 using AnonymousChatBot.WebApi.Helpers;
-using Microsoft.EntityFrameworkCore;
-using Telegram.Bot;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpClient("TelegramWebhook")
-    .AddTypedClient<ITelegramBotClient>(httpClient =>
-        new TelegramBotClient(builder.Configuration["BotConfiguration:BotToken"], httpClient));
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
-});
-
-builder.Services.InitializeRepositories();
-builder.Services.InitializeServices();
+builder.Services.AddService();
+builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddWebApi(builder.Configuration);
 
 builder.Services.AddControllers().AddNewtonsoftJson();
-
 
 var app = builder.Build();
 

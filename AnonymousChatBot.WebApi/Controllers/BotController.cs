@@ -1,4 +1,5 @@
 ﻿using AnonymousChatBot.Service.Implementations;
+using AnonymousChatBot.WebApi.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot.Types;
 
@@ -10,9 +11,9 @@ public class BotController : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] Update update,
-        [FromServices] HandleUpdateService handleUpdateService, CancellationToken cancellationToken)
+        [FromServices] HandleUpdate handleUpdate, CancellationToken cancellationToken)
     {
-        await handleUpdateService.HandleUpdateAsync(update, cancellationToken);
+        await handleUpdate.HandleUpdateAsync(update, cancellationToken);
 
         return Ok();
     }
