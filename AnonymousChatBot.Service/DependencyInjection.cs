@@ -8,12 +8,18 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddService(this IServiceCollection services)
     {
-        services.AddScoped<ICommand, InterestCommand>();
+        /*services.AddScoped<ICommand, InterestCommand>();
         services.AddScoped<ICommand, LinkCommand>();
         services.AddScoped<ICommand, NextCommand>();
         services.AddScoped<ICommand, StartCommand>();
-        services.AddScoped<ICommand, StopCommand>();
+        services.AddScoped<ICommand, StopCommand>();*/
         services.AddScoped<IMessageService, MessageService>();
+
+        services.AddKeyedScoped<ICommand, InterestCommand>("interest");
+        services.AddKeyedScoped<ICommand, LinkCommand>("link");
+        services.AddKeyedScoped<ICommand, NextCommand>("next");
+        services.AddKeyedScoped<ICommand, StartCommand>("start");
+        services.AddKeyedScoped<ICommand, StopCommand>("stop");
 
         return services;
     }
